@@ -1,4 +1,5 @@
 #include "qualis.h"
+#include <fstream>
 
 namespace qualis {
     namespace {
@@ -98,6 +99,24 @@ namespace qualis {
                     i++;
                 }
                 i++;
+            }
+        }
+
+        return parsePartsList(partsList);
+    }
+
+    vector<TestUnit> parseFile(const string filePath, const ParseOption parseOption) {
+        ifstream input(filePath);
+        vector<vector<string>> partsList;
+
+        string prefix = parseOption.lineRegPrefix;
+        unsigned int prefixLen = prefix.length();
+
+        for(string line; getline(input, line);) {
+            cout << line << endl;
+            if(line.substr(0, prefixLen) == prefix) {
+              auto parts = parseLine(line, prefixLen, line.length() - 1, parseOption.delimiter);
+              partsList.push_back(parts);
             }
         }
 

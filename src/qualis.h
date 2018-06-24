@@ -27,15 +27,15 @@ namespace qualis {
             TestUnit(const string _fun_invoke, const vector<vector<string>> _caseList): fun_invoke(_fun_invoke), caseList(_caseList) {}
     };
 
+    vector<TestUnit> parseFile(const string filePath, const ParseOption parseOption);
+
     /**
      * @param text: source string
      */
     vector<TestUnit> parseText(const string text, const ParseOption parseOption);
 
     /**
-     * caseConvert, (fun_invoke, paramList) => testCode
+     * translate test specific to target unit test code
      */
-    typedef string (*CaseConverter)(string, vector<string>);
-
     string generateTestCode(vector<TestUnit> testUnits, string (*caseConverter)(string, vector<string>), string (*caseCodeMerger)(vector<string> caseCodeList));
 }
