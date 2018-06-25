@@ -14,14 +14,16 @@ namespace cpp_qualis_case_converter {
             }
         }
 
-        code = "assert(" + code + ") == " + params[len - 1] + ");";
+        code += ")";
 
         code = "  try {\n"
           "    cout << \"start to run test for: " + fun_invoke + "\" << endl;\n"
-          "    " + code +  ""
+          "    auto real = " + code + ";\n"
+          "    auto expect = " + params[len -1] + ";\n"
+          "    assert(real == expect);"
           "\n  }"
           " catch(const exception& e) {\n"
-          "    throw \"Fail to run test unit: " + fun_invoke+ "\";"
+          "    throw \"Fail to run test unit: " + fun_invoke + "\";"
           "\n  }";
         return code;
     }

@@ -7,11 +7,11 @@ using namespace qualis;
 
 int main() {
     // auto testUnits = parseText("//#add\n//#1|2|3\n//#succ\n//#1|2", ParseOption());
-    auto testUnits = parseFile("./test/test.cc", ParseOption());
+    auto testUnits = parseFile("./src/qualis.h", ParseOption());
     auto text = generateTestCode(testUnits,
             &cpp_qualis_case_converter::convertCase,
             &cpp_qualis_case_converter::mergeCaseCode,
-            "#include \"./test.h\"");
-    saveTestCodeToFile(text, "./test/gen.cc");
+            "#include \"../src/qualis.h\"");
+    saveTestCodeToFile(text, "./test/qualis_unit_test.cc");
     return 0;
 }

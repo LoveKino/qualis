@@ -71,6 +71,10 @@ namespace qualis {
         }
     }
 
+    bool TestUnit::operator== (const TestUnit &a) const {
+        return this -> caseList == a.caseList && this -> caseList == a.caseList;
+    }
+
     vector<TestUnit> parseText(const string text, const ParseOption parseOption) {
         unsigned int txtLen = text.length();
         unsigned int i = 0;
@@ -113,9 +117,14 @@ namespace qualis {
         unsigned int prefixLen = prefix.length();
 
         for(string line; getline(input, line);) {
-            cout << line << endl;
-            if(line.substr(0, prefixLen) == prefix) {
-              auto parts = parseLine(line, prefixLen, line.length() - 1, parseOption.delimiter);
+            unsigned int start = 0;
+            while(start < line.size() &&
+                    (line[start] == ' ' || line[start] == '\t' || line[start] == '\f')) {
+                start ++;
+            }
+
+            if(start < line.size() && line.substr(start, prefixLen) == prefix) {
+              auto parts = parseLine(line, start + prefixLen, line.length() - 1, parseOption.delimiter);
               partsList.push_back(parts);
             }
         }

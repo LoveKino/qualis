@@ -25,6 +25,7 @@ namespace qualis {
             const string fun_invoke;
             const vector<vector<string>> caseList;
             TestUnit(const string _fun_invoke, const vector<vector<string>> _caseList): fun_invoke(_fun_invoke), caseList(_caseList) {}
+            bool operator == (const TestUnit &a) const; 
     };
 
     vector<TestUnit> parseFile(const string filePath, const ParseOption parseOption);
@@ -32,6 +33,8 @@ namespace qualis {
     /**
      * @param text: source string
      */
+    //#qualis::parseText
+    //#"//#add\n//#1\|2\|3" | qualis::ParseOption() | vector<qualis::TestUnit>()
     vector<TestUnit> parseText(const string text, const ParseOption parseOption);
 
     /**
