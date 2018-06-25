@@ -15,14 +15,29 @@ namespace cpp_qualis_case_converter {
         }
 
         code = "assert(" + code + ") == " + params[len - 1] + ");";
+
+        code = "  try {\n"
+          "    cout << \"start to run test for: " + fun_invoke + "\" << endl;\n"
+          "    " + code +  ""
+          "\n  }"
+          " catch(const exception& e) {\n"
+          "    throw \"Fail to run test unit: " + fun_invoke+ "\";"
+          "\n  }";
         return code;
     }
 
-    string mergeCaseCode(vector<string> caseCodeList) {
+    string mergeCaseCode(vector<string> caseCodeList, string setup) {
         string code = "";
         for(auto const &caseCode: caseCodeList) {
             code += code == ""? caseCode: "\n" + caseCode;
         }
+
+        code = "#include <iostream>\n"
+            "#include <assert.h>\n\n"
+            "using namespace std;\n"
+            "" + setup + "\n\n"
+            "int main() {\n" + code + ""
+            "\n}";
         return code;
     }
 }

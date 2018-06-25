@@ -123,7 +123,10 @@ namespace qualis {
         return parsePartsList(partsList);
     }
 
-    string generateTestCode(vector<TestUnit> testUnits, string (*caseConverter)(string, vector<string>), string (*caseCodeMerger)(vector<string> caseCodeList)) {
+    string generateTestCode(vector<TestUnit> testUnits,
+            string (*caseConverter)(string, vector<string>),
+            string (*caseCodeMerger)(vector<string>, string),
+            string setup) {
         vector<string> caseCodeList;
 
         for(auto const& testUnit: testUnits) {
@@ -135,6 +138,13 @@ namespace qualis {
             }
         }
 
-        return (*caseCodeMerger)(caseCodeList);
+        return (*caseCodeMerger)(caseCodeList, setup);
+    }
+
+    void saveTestCodeToFile(string testCode, string filePath) {
+        ofstream file;
+        file.open(filePath);
+        file << testCode;
+        file.close();
     }
 }

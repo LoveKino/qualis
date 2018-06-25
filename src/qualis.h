@@ -37,5 +37,10 @@ namespace qualis {
     /**
      * translate test specific to target unit test code
      */
-    string generateTestCode(vector<TestUnit> testUnits, string (*caseConverter)(string, vector<string>), string (*caseCodeMerger)(vector<string> caseCodeList));
+    string generateTestCode(vector<TestUnit> testUnits,
+            string (*caseConverter)(string, vector<string>),
+            string (*caseCodeMerger)(vector<string>, string),
+            string setup);
+
+    void saveTestCodeToFile(string testCode, string filePath);
 }
