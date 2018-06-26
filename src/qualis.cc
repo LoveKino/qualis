@@ -10,22 +10,37 @@ namespace qualis {
             unsigned int i = lineStartIndex;
             vector<string> parts;
             unsigned int partStartIndex = lineStartIndex;
+            string part = "";
 
             while(i <= lineEndIndex) {
-                if(text[i] == '\\') {
+                char ch = text[i];
+
+                if(ch == '\\') {
+                    if(i + 1 <= lineEndIndex) {
+                      if(text[i + 1] == '|') {
+                        part += text[i + 1];
+                      } else {
+                        part += ch;
+                        part += text[i + 1];
+                      }
+                    } else {
+                      part += ch;
+                    }
+
                     i += 2;
-                } else if(text[i] == delimiter) {
-                    int partLen = i - partStartIndex;
-                    parts.push_back(partLen < 0? "": text.substr(partStartIndex, partLen));
+                } else if(ch == delimiter) {
+                    parts.push_back(part);
                     partStartIndex = i + 1;
+
+                    part = "";
                     i++;
                 } else {
+                    part += ch;
                     i++;
                 }
             }
 
-            int partLen = lineEndIndex - partStartIndex + 1;
-            parts.push_back(partLen < 0? "": text.substr(partStartIndex, partLen));
+            parts.push_back(part);
 
             return parts;
         }
