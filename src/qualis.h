@@ -34,7 +34,7 @@ namespace qualis {
      * @param text: source string
      */
     //#qualis::parseText
-    //#"//#add\n//#1\|2\|3" | qualis::ParseOption() | vector<qualis::TestUnit>()
+    //#"" | qualis::ParseOption() | vector<qualis::TestUnit>()
     vector<TestUnit> parseText(const string text, const ParseOption parseOption);
 
     /**

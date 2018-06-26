@@ -17,7 +17,7 @@ namespace cpp_qualis_case_converter {
         code += ")";
 
         code = "  try {\n"
-          "    cout << \"start to run test for: " + fun_invoke + "\" << endl;\n"
+          "    cout << \"[" + fun_invoke + "]\" << endl;\n"
           "    auto real = " + code + ";\n"
           "    auto expect = " + params[len -1] + ";\n"
           "    assert(real == expect);"

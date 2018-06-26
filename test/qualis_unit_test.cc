@@ -6,8 +6,8 @@ using namespace std;
 
 int main() {
   try {
-    cout << "start to run test for: qualis::parseText" << endl;
-    auto real = qualis::parseText("//#add\n//#1|2|3" ,  qualis::ParseOption() );
+    cout << "[qualis::parseText]" << endl;
+    auto real = qualis::parseText("" ,  qualis::ParseOption() );
     auto expect =  vector<qualis::TestUnit>();
     assert(real == expect);
   } catch(const exception& e) {
